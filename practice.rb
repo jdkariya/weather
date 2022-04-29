@@ -42,3 +42,18 @@ weather_data = JSON.parse(response)
 # city = gets.chomp
 # puts city
 # Note: what happens if the user-entered value is not a known city? You'll want to do some error handling.
+
+# Step 1: Pull out city name
+city = weather_data["region"]
+current_temp_f = weather_data["currentConditions"]["temp"]["f"]
+current_condition = weather_data["currentConditions"]["comment"].downcase
+puts "In #{city} it is currently #{current_temp_f} degrees and #{current_condition}."
+today_forecast = weather_data["next_days"][0]
+puts "The rest of the day will be a high of #{today_forecast["max_temp"]["f"]} and #{today_forecast["comment"].downcase}."
+puts "The upcoming weather forecast is:"
+for daily_forecast_data in weather_data["next_days"]
+    day_of_week = daily_forecast_data["day"]
+    high_temp = daily_forecast_data["max_temp"]["f"]
+    conditions = daily_forecast_data["comment"].downcase
+    puts "#{day_of_week}: a high of #{high_temp} and #{conditions}."
+  end
