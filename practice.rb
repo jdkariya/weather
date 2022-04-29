@@ -2,7 +2,9 @@
 # ----------------------
 require "net/http"
 require "json"
-url = "https://weatherdbi.herokuapp.com/data/weather/chicago"
+puts "What city are you in?"
+city = gets.chomp.delete(" ")
+url = "https://weatherdbi.herokuapp.com/data/weather/#{city}"
 uri = URI(url)
 response = Net::HTTP.get(uri)
 weather_data = JSON.parse(response)
